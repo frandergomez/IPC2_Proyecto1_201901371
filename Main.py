@@ -179,3 +179,86 @@ def mostrar_datos_estudiante():
     print("******************************************************")
     print("Cada línea de código es un peldaño hacia la cima de tus metas")
     print("")
+
+    def generar_grafica(senales):
+    if not senales:
+        print("No hay señales cargadas para generar gráfica.")
+        return
+
+    primera_senal = senales[0]
+
+    if not primera_senal.tabla:
+        print("La primera señal no tiene datos para generar gráfica.")
+        return
+
+    matriz = primera_senal.tabla
+    filas = len(matriz)
+    columnas = len(matriz[0])
+
+    dot = graphviz.Digraph(format='png')
+
+    # Agregar nodos para cada celda en la matriz
+    for fila in range(filas):
+        for columna in range(columnas):
+            valor = matriz[fila][columna]
+            dot.node(f"{fila}_{columna}", label=str(valor))
+
+    # Agregar bordes entre celdas vecinas
+    for fila in range(filas):
+        for columna in range(columnas):
+            nodo_actual = f"{fila}_{columna}"
+            if fila + 1 < filas:
+                nodo_vecino = f"{fila + 1}_{columna}"
+                dot.edge(nodo_actual, nodo_vecino)
+            if columna + 1 < columnas:
+                nodo_vecino = f"{fila}_{columna + 1}"
+                dot.edge(nodo_actual, nodo_vecino)
+
+    dot.render('matriz_grafica', view=True)
+    print("Gráfica creada correctamente.")
+
+    senales_ejemplo = [...]
+    generar_grafica(senales_ejemplo)
+
+def inicializar_sistema():
+    # Aquí iría el código para crear el informe de inventario
+    print("Informe creado")
+    print("")
+
+def salir():
+    print("Saliendo......")
+    print("")
+
+while True:
+    print("Menú:")
+    print("1. Cargar archivo")
+    print("2. Procesar archivo")
+    print("3. Escribir archivo de salida")
+    print("4. Mostrar datos del estudiante")
+    print("5. Generar gráfica")
+    print("6. Inicializar sistema")
+    print("7. Salir")
+    
+    opcion = input("Seleccione una opción: ")
+    
+    if opcion == '1':
+        cargar_archivo()
+    elif opcion == '2':
+        procesar_archivo()
+    elif opcion == '3':
+        escribir_archivo_salida(senales)
+    elif opcion == '4':
+        mostrar_datos_estudiante()
+    elif opcion == '5':
+        generar_grafica(senales)
+    elif opcion == '6':
+        inicializar_sistema()
+    elif opcion == '7':
+        print("Saliendo del programa...")
+        break
+    else:
+        print("Opción no válida. Por favor, seleccione una opción válida.")
+
+# Llamada a la función principal
+if __name__ == "__main__":
+    main()

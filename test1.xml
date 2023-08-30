@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<senales>
+  <senal nombre="Señal Facilita" t="10" A="3">
+    <dato t="1" A="1">3</dato>
+    <dato t="1" A="2">5</dato>
+    <dato t="1" A="3">4</dato>
+    <dato t="2" A="1">1</dato>
+    <dato t="2" A="2">2</dato>
+    <dato t="2" A="3">3</dato>
+    <dato t="3" A="1">0</dato>
+    <dato t="3" A="2">0</dato>
+    <dato t="3" A="3">0</dato>
+    <dato t="4" A="1">0</dato>
+    <dato t="4" A="2">0</dato>
+    <dato t="4" A="3">0</dato>
+    <dato t="5" A="1">0</dato>
+    <dato t="5" A="2">0</dato>
+    <dato t="5" A="3">0</dato>
+    <dato t="6" A="1">5</dato>
+    <dato t="6" A="2">0</dato>
+    <dato t="6" A="3">7</dato>
+    <dato t="7" A="1">2</dato>
+    <dato t="7" A="2">0</dato>
+    <dato t="7" A="3">1</dato>
+    <dato t="8" A="1">5</dato>
+    <dato t="8" A="2">5</dato>
+    <dato t="8" A="3">0</dato>
+    <dato t="9" A="1">4</dato>
+    <dato t="9" A="2">4</dato>
+    <dato t="9" A="3">0</dato>
+    <dato t="10" A="1">5</dato>
+    <dato t="10" A="2">9</dato>
+    <dato t="10" A="3">1</dato>
+  </senal>
+</senales>

@@ -168,3 +168,14 @@ def escribir_archivo_salida(senales):
     tree.write('salida.xml', encoding='utf-8', xml_declaration=True)
     
     print("Archivo de salida XML creado exitosamente.")
+
+def mostrar_datos_estudiante():
+    print("******************************************************")
+    print("Frander Oveldo Carreto Gómez")
+    print("201901371")
+    print("Introduccion a la programación y computacion 2 sección  D")
+    print("Ingenieria en Ciencias y sistemas")
+    print("4to Semestre")
+    print("******************************************************")
+    print("Cada línea de código es un peldaño hacia la cima de tus metas")
+    print("")

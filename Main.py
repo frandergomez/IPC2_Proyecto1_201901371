@@ -146,3 +146,25 @@ def procesar_archivo():
     mostrar_datos_y_tablas(senales)
     print("Datos del archivo XML cargados y procesados.")
     return senales
+
+def escribir_archivo_salida(senales):
+    root = ET.Element('senalesReducidas')
+
+    for senal in senales:
+        senal_elem = ET.SubElement(root, 'senal', nombre=senal.nombre, A=str(len(senal.tabla[0])))
+        
+        for grupo_num, grupo_tiempos, grupo_datos in zip(range(1, len(senal.tabla) + 1), senal.tabla, senal.tabla):
+            grupo_elem = ET.SubElement(senal_elem, 'grupo', g=str(grupo_num))
+            tiempos_elem = ET.SubElement(grupo_elem, 'tiempos')
+            tiempos_elem.text = ','.join(str(i + 1) for i, value in enumerate(grupo_tiempos) if value is not None)
+            
+            datos_grupo_elem = ET.SubElement(grupo_elem, 'datosGrupo')
+            for A, value in enumerate(grupo_datos, start=1):
+                if value is not None:
+                    dato_elem = ET.SubElement(datos_grupo_elem, 'dato', A=str(A))
+                    dato_elem.text = str(value)
+    
+    tree = ET.ElementTree(root)
+    tree.write('salida.xml', encoding='utf-8', xml_declaration=True)
+    
+    print("Archivo de salida XML creado exitosamente.")

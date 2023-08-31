@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+import graphviz
 
 # Definición de clases
 class Dato:
@@ -82,6 +83,9 @@ def mostrar_datos_y_tablas(senales):
 # Función principal y menú
 def main():
 
+    global senales
+    senales = []
+
     while True:
         print("Menú:")
         print("1. Cargar archivo")
@@ -103,7 +107,7 @@ def main():
         elif opcion == '4':
             mostrar_datos_estudiante()
         elif opcion == '5':
-            generar_grafica()
+            generar_grafica(senales)
         elif opcion == '6':
             inicializar_sistema()
         elif opcion == '7':
@@ -128,11 +132,12 @@ def cargar_archivo():
 
 def procesar_archivo():
     ruta_archivo = input("Ingrese la ruta del archivo a cargar: ")
-
     try:
         with open(ruta_archivo, 'r', encoding='utf-8') as archivo:
             contenido = archivo.read()
 
+            # Declarar senales como global
+            global senales
             senales = cargar_datos_desde_xml(contenido)
             mostrar_datos_y_tablas(senales)
             print("Datos del archivo XML cargados y procesados.")
@@ -141,11 +146,6 @@ def procesar_archivo():
     except Exception as e:
         print(f"Error al cargar el archivo: {e}")
     print("")
-
-    senales = cargar_datos_desde_xml(contenido)
-    mostrar_datos_y_tablas(senales)
-    print("Datos del archivo XML cargados y procesados.")
-    return senales
 
 def escribir_archivo_salida(senales):
     root = ET.Element('senalesReducidas')
@@ -180,45 +180,45 @@ def mostrar_datos_estudiante():
     print("Cada línea de código es un peldaño hacia la cima de tus metas")
     print("")
 
-    def generar_grafica(senales):
-    if not senales:
-        print("No hay señales cargadas para generar gráfica.")
-        return
+def generar_grafica(senales):
+    try:
+        if not senales:
+            print("No hay señales cargadas para generar gráfica.")
+            return
 
-    primera_senal = senales[0]
+        primera_senal = senales[0]
 
-    if not primera_senal.tabla:
-        print("La primera señal no tiene datos para generar gráfica.")
-        return
+        if not primera_senal.tabla:
+            print("La primera señal no tiene datos para generar gráfica.")
+            return
 
-    matriz = primera_senal.tabla
-    filas = len(matriz)
-    columnas = len(matriz[0])
+        matriz = primera_senal.tabla
+        filas = len(matriz)
+        columnas = len(matriz[0])
 
-    dot = graphviz.Digraph(format='png')
+        dot = graphviz.Digraph(format='png')
 
-    # Agregar nodos para cada celda en la matriz
-    for fila in range(filas):
-        for columna in range(columnas):
-            valor = matriz[fila][columna]
-            dot.node(f"{fila}_{columna}", label=str(valor))
+        # Agregar nodos para cada celda en la matriz
+        for fila in range(filas):
+            for columna in range(columnas):
+                valor = matriz[fila][columna]
+                dot.node(f"{fila}_{columna}", label=str(valor))
 
-    # Agregar bordes entre celdas vecinas
-    for fila in range(filas):
-        for columna in range(columnas):
-            nodo_actual = f"{fila}_{columna}"
-            if fila + 1 < filas:
-                nodo_vecino = f"{fila + 1}_{columna}"
-                dot.edge(nodo_actual, nodo_vecino)
-            if columna + 1 < columnas:
-                nodo_vecino = f"{fila}_{columna + 1}"
-                dot.edge(nodo_actual, nodo_vecino)
+        # Agregar bordes entre celdas vecinas
+        for fila in range(filas):
+            for columna in range(columnas):
+                nodo_actual = f"{fila}_{columna}"
+                if fila + 1 < filas:
+                    nodo_vecino = f"{fila + 1}_{columna}"
+                    dot.edge(nodo_actual, nodo_vecino)
+                if columna + 1 < columnas:
+                    nodo_vecino = f"{fila}_{columna + 1}"
+                    dot.edge(nodo_actual, nodo_vecino)
 
-    dot.render('matriz_grafica', view=True)
-    print("Gráfica creada correctamente.")
-
-    senales_ejemplo = [...]
-    generar_grafica(senales_ejemplo)
+        dot.render('matriz_grafica', view=True)
+        print("Gráfica creada correctamente.")
+    except Exception as e:
+        print("Error al generar la gráfica:", e)
 
 def inicializar_sistema():
     # Aquí iría el código para crear el informe de inventario

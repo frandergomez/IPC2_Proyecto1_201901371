@@ -52,7 +52,7 @@ def cargar_datos_desde_xml(xml_string):
             tabla[current.t - 1][current.A - 1] = current.value
             current = current.next
         
-        senal.tabla = tabla  # Asignar la tabla a la señal
+        senal.tabla = tabla 
         senales.append(senal)
     
     return senales
@@ -221,7 +221,6 @@ def generar_grafica(senales):
         print("Error al generar la gráfica:", e)
 
 def inicializar_sistema():
-    # Aquí iría el código para crear el informe de inventario
     print("Informe creado")
     print("")
 
@@ -259,6 +258,5 @@ while True:
     else:
         print("Opción no válida. Por favor, seleccione una opción válida.")
 
-# Llamada a la función principal
 if __name__ == "__main__":
     main()

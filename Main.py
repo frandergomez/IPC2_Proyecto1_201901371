@@ -1,5 +1,7 @@
 import xml.etree.ElementTree as ET
 import graphviz
+import os
+import sys
 
 # Definición de clases
 class Dato:
@@ -221,8 +223,10 @@ def generar_grafica(senales):
         print("Error al generar la gráfica:", e)
 
 def inicializar_sistema():
-    print("Informe creado")
-    print("")
+    print("Reiniciando el programa...")
+    input("Presione Enter para continuar...")
+    os.system('clear' if os.name == 'posix' else 'cls')  # Limpia la consola según el sistema operativo
+    os.execl(sys.executable, sys.executable, *sys.argv)
 
 def salir():
     print("Saliendo......")
